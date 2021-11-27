@@ -15,7 +15,7 @@ import atweb.nhom6.model.ACCOUNT;
 /**
  * Servlet implementation class signinServlet
  */
-@WebServlet("/signin")
+@WebServlet("/login")
 public class SignInServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private SignInDAO signinDao = new SignInDAO();
@@ -28,14 +28,13 @@ public class SignInServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/signin/signin_form.jsp");
+		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/login.jsp");
 
 		dispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/signin/success.jsp");
 		//lấy thông tin từ client
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -55,12 +54,10 @@ public class SignInServlet extends HttpServlet {
 
 		//Trả về trạng thái tương ứng
 		if (result > 0) {
-			System.out.println("Thanh cong");
+			response.sendRedirect("./home");
 		} else {
-			dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/signin/fail.jsp");
+			response.sendRedirect("./login");
 		}
-		
-		dispatcher.forward(request, response);
 
 	}
 

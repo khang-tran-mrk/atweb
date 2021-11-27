@@ -12,12 +12,11 @@ public class ConnectionToDB {
 
 	}
 
-	public Connection getConnect() {
+	public static Connection getConnect() {
 		Connection connection = null;
-		PreparedStatement stmt = null;
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			String URL = "jdbc:sqlserver://1.52.187.7:1433; Database=atweb; user=sa; password=sa";
+			String URL = "jdbc:sqlserver://localhost:1433; Database=FINALLTM; user=sa; password=11111";
 			Connection con = DriverManager.getConnection(URL);
 			return con;
 		} catch (ClassNotFoundException e) {
@@ -49,6 +48,9 @@ public class ConnectionToDB {
 
 	public static void main(String[] args) throws Exception {
 		ConnectionToDB connect = new ConnectionToDB();
-		System.out.println(connect.getConnect());
+		ResultSet rs = connect.selectData("select * from account");
+		while(rs.next()) {
+			System.out.println(rs.getString(3));
+		}
 	}
 }

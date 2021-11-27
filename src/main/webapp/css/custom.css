@@ -1,0 +1,29 @@
+.tabs{
+	display: flex;
+	gap:2px;
+	padding: 20px 20px 0 20px;
+	background: #f8f9fc;
+}
+
+.tabs .tab{
+	background: #f8f9fc;
+	color: #858796;
+	border: none;
+	outline: none;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	padding: 8px 12px;
+}
+
+.tabs .tab.active{
+	background: #fff;
+	color: #4e73df;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
