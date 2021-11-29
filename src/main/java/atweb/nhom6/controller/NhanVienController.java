@@ -28,11 +28,15 @@ public class NhanVienController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/nhanvien.jsp");
-//		List<NhanVien> nvs = nvdao.selectALLEncryptNhanVien();
-//		for(NhanVien nv: nvs) {
-//			System.out.println(nv.getHoTen());
-//		}
-//		request.setAttribute("nvs", nvs);
+		
+		String project_name = request.getContextPath().split("/")[1];
+		String path = request.getServletContext().getRealPath("").split(".metadata")[0] + project_name + File.separator;
+		
+		List<NhanVien> nvs = nvdao.selectALLEncryptNhanVien(path);
+		for(NhanVien nv: nvs) {
+			System.out.println(nv.getHoTen());
+		}
+		request.setAttribute("nvs", nvs);
 		dispatcher.forward(request, response);
 	}
 
@@ -46,8 +50,10 @@ public class NhanVienController extends HttpServlet {
 		String tenDN = request.getParameter("tendn");
 		String matKhau = request.getParameter("matKhau");
 		NhanVien nv = new NhanVien(maNV, hoTen, email, luong, tenDN, matKhau);
+		
 		String project_name = request.getContextPath().split("/")[1];
 		String path = request.getServletContext().getRealPath("").split(".metadata")[0] + project_name + File.separator;
+		
 		try {
 			nvdao.spInsertEncryptNhanVien(nv, path);
 		} catch (Exception e) {
