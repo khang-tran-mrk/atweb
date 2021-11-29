@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +13,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SB Admin 2 - Tables</title>
+<title>Class Manager</title>
 
 <!-- Custom fonts for this template -->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -271,34 +272,26 @@
 									cellspacing="0">
 									<thead>
 										<tr>
-											<th>Name</th>
-											<th>Position</th>
-											<th>Office</th>
-											<th>Age</th>
-											<th>Start date</th>
-											<th>Salary</th>
+											<th>Mã lớp</th>
+											<th>Tên lớp</th>
+											<th>Mã nhân viên</th>
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
-											<th>Name</th>
-											<th>Position</th>
-											<th>Office</th>
-											<th>Age</th>
-											<th>Start date</th>
-											<th>Salary</th>
+											<th>Mã lớp</th>
+											<th>Tên lớp</th>
+											<th>Mã nhân viên</th>
 										</tr>
 									</tfoot>
 									<tbody>
-
-										<tr>
-											<td>Donna Snider</td>
-											<td>Customer Support</td>
-											<td>New York</td>
-											<td>27</td>
-											<td>2011/01/25</td>
-											<td>$112,000</td>
-										</tr>
+										<c:forEach var="lop" items="${lops }">
+											<tr>
+												<td>${lop.maLop }</td>
+												<td>${lop.tenLop }</td>
+												<td>${lop.maNV }</td>
+											</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>
@@ -313,8 +306,8 @@
 										class="form-control" placeholder="Nhập tên lớp ...">
 								</div>
 								<div class="form-group">
-									<label for="">Mã nhân viên</label> <select
-										class="form-control" id="">
+									<label for="">Mã nhân viên</label> <select class="form-control"
+										id="">
 										<option>1</option>
 										<option>2</option>
 									</select>

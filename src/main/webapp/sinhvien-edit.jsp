@@ -13,7 +13,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Staff</title>
+<title>SB Admin 2 - Tables</title>
 
 <!-- Custom fonts for this template -->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -262,76 +262,63 @@
 
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
-						<div class="tabs">
-							<button class="tab active">DataTables</button>
-							<button class="tab">Add</button>
-						</div>
+						
 						<div class="card-body">
-							<div class="table-responsive listing-tab tab-content active">
-								<table class="table table-bordered" id="dataTable" width="100%"
-									cellspacing="0">
-									<thead>
-										<tr>
-											<th>Mã nhân viên</th>
-											<th>Họ tên</th>
-											<th>Email</th>
-											<th>Lương</th>
-											<th>Tên đăng nhập</th>
-										</tr>
-									</thead>
-									<tfoot>
-										<tr>
-											<th>Mã nhân viên</th>
-											<th>Họ tên</th>
-											<th>Email</th>
-											<th>Lương</th>
-											<th>Tên đăng nhập</th>
-										</tr>
-									</tfoot>
-									<tbody>
-										<c:forEach var="nv" items="${nvs }">
-											<tr>
-												<td>${nv.maNV }</td>
-												<td>${nv.hoTen }</td>
-												<td>${nv.email }</td>
-												<td>${nv.luong }</td>
-												<td>${nv.tenDN }</td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
 							<!-- add lop -->
-							<form class="add-tab tab-content " method="post" action="nhan-vien">
+							<form class="add-tab tab-content active" method="POST"
+								action="edit-sinh-vien">
 								<div class="form-group">
-									<label for="">Mã nhân viên</label> <input type="text"
-										class="form-control" placeholder="Nhập mã nhân viên ..." name="mnv">
+									<label for="">Mã sinh viên</label> <input type="text"
+										class="form-control msv" placeholder="Nhập mã sinh viên ..." readonly value="${sv.maSV }"
+										name="msv"> <span class="error-message"></span>
 								</div>
 								<div class="form-group">
-									<label for="">Họ tên nhân viên</label> <input type="text"
-										class="form-control" placeholder="Nhập tên nhân viên ..." name="hoten">
+									<label for="">Họ tên sinh viên</label> <input type="text"
+										class="form-control hoten"
+										placeholder="Nhập tên sinh viên ..." value="${sv.hoTen }" name="hoten"> <span
+										class="error-message"></span>
 								</div>
 								<div class="form-group">
-									<label for="">Email</label> <input type="email"
-										class="form-control" placeholder="Nhập email ..." name="email">
+									<label for="">Ngày sinh</label> <input type="date"
+										class="form-control ngaysinh" value="${sv.ngaySinh }" name="ngaysinh"> <span
+										class="error-message"></span>
 								</div>
 								<div class="form-group">
-									<label for="">Lương</label> <input type="number"
-										class="form-control" placeholder="Nhập lương ..." min="0" name="luong">
+									<label for="">Địa chỉ</label> <input type="text"
+										class="form-control diachi" placeholder="Nhập địa chỉ ..." value="${sv.diaChi }"
+										name="diachi"> <span class="error-message"></span>
+								</div>
+								<div class="form-group">
+									<label for="">Lớp</label> <select class="form-control" id=""
+										name="malop">
+										<c:forEach var="l" items="${lops }">
+										<c:if test="${l.maLop == sv.maLop }">
+											<option selected value="${l.maLop }">${l.tenLop }</option>
+										</c:if>
+										<c:if test="${l.maLop != sv.maLop }">
+											<option value="${l.maLop }">${l.tenLop }</option>
+										</c:if>
+										</c:forEach>
+									</select>
 								</div>
 								<div class="form-group">
 									<label for="">Tên đăng nhập</label> <input type="text"
-										class="form-control" placeholder="Nhập tên đăng nhập ..." name="tendn">
+										class="form-control tendn"
+										placeholder="Nhập tên đăng nhập ..." value="${sv.tenDN }" name="tendn"> <span
+										class="error-message"></span>
 								</div>
 								<div class="form-group">
 									<label for="">Mật khẩu</label> <input type="password"
-										class="form-control" placeholder="Nhập mật khẩu ..." name="matkhau">
+										class="form-control matkhau" placeholder="Nhập mật khẩu ..."
+										name="matkhau"> <span class="error-message"></span>
 								</div>
 								<div class="form-group">
 									<label for="">Nhập lại mật khẩu</label> <input type="password"
-										class="form-control" placeholder="Nhập lại mật khẩu ...">
+										class="form-control repassword"
+										placeholder="Nhập lại mật khẩu ..."> <span
+										class="error-message"></span>
 								</div>
-								<button type="submit" class="btn btn-primary">Thêm</button>
+								<button type="submit" class="btn btn-primary">Update</button>
 							</form>
 						</div>
 					</div>
@@ -403,6 +390,10 @@
 
 	<!-- Page level custom scripts -->
 	<script src="js/demo/datatables-demo.js"></script>
+
+
+
+
 
 </body>
 

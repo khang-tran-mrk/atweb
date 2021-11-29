@@ -34,10 +34,10 @@ public class NhanVienDao {
 
 		// generate key for nhanVien
 		RSAKeyPairGenerator keyPairGenerator = new RSAKeyPairGenerator();
-		keyPairGenerator.writeToFile("RSA/publicKey_" + nv.getMaNV(), keyPairGenerator.getPublicKey().getEncoded());
-		keyPairGenerator.writeToFile("RSA/privateKey_" + nv.getMaNV(), keyPairGenerator.getPrivateKey().getEncoded());
+		keyPairGenerator.writeToFile("RSA\\publicKey_" + nv.getMaNV(), keyPairGenerator.getPublicKey().getEncoded());
+		keyPairGenerator.writeToFile("RSA\\privateKey_" + nv.getMaNV(), keyPairGenerator.getPrivateKey().getEncoded());
 		// encrypt message by PublicKey
-		PublicKey publicKey = KeyReader.getPublicKeyFromFile("RSA/publicKey_" + nv.getMaNV());
+		PublicKey publicKey = KeyReader.getPublicKeyFromFile("RSA\\publicKey_" + nv.getMaNV());
 		String encryptedLuong = Base64.getEncoder()
 				.encodeToString(encrypt(String.valueOf(nv.getLuong()), keyToString(publicKey)));
 
@@ -50,7 +50,7 @@ public class NhanVienDao {
 			cs.setString(4, encryptedLuong);
 			cs.setString(5, nv.getTenDN());
 			cs.setString(6, matKhauEncryptedStr);
-			cs.setString(7, "RSA/publicKey_" + nv.getMaNV());
+			cs.setString(7, "RSA\\publicKey_" + nv.getMaNV());
 			cs.execute();
 		} catch (SQLException ex) {
 			Logger.getLogger(NhanVienDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -239,57 +239,57 @@ public class NhanVienDao {
 	// end sha1
 	// ====
 
-//	public static void main(String[] args) {
-//		NhanVienDao nvdao = new NhanVienDao();
-////		NhanVien nv = new NhanVien();
-////		nv.setHoTen("NV1");
-////		nv.setTenDN("NV1");
-////		nv.setEmail("nv1@mail.com");
-////		nv.setMaNV("NV1");
-////		nv.setLuong(1300000);
+	public static void main(String[] args) {
+		NhanVienDao nvdao = new NhanVienDao();
+//		NhanVien nv = new NhanVien();
+//		nv.setHoTen("NV1");
+//		nv.setTenDN("NV1");
+//		nv.setEmail("nv1@mail.com");
+//		nv.setMaNV("NV1");
+//		nv.setLuong(1300000);
+//		nv.setMatKhau("11111");
+//		try {
+//			nvdao.spInsertEncryptNhanVien(nv);
+//		} catch (Exception ex) {
+//			Logger.getLogger(NhanVienDao.class.getName()).log(Level.SEVERE, null, ex);
+//		}
+		
+		List<NhanVien> nvs = nvdao.selectALLEncryptNhanVien();
+		for(NhanVien nv : nvs) {
+			System.out.println(nv.getMaNV());
+			System.out.println(nv.getHoTen());
+			System.out.println(nv.getEmail());
+			System.out.println(nv.getLuong());
+			System.out.println(nv.getTenDN());
+			System.out.println(nv.getLuong());
+		}
+		
+//		NhanVien nv = nvdao.getNhanVienByMaNV("NV1");
+//		System.out.println(nv.getMaNV());
+//		System.out.println(nv.getHoTen());
+//		System.out.println(nv.getEmail());
+//		System.out.println(nv.getLuong());
+//		System.out.println(nv.getTenDN());
+//		System.out.println(nv.getLuong());
+		
+//		NhanVien nv = nvdao.spSelectEncryptNhanVien("NV1", "11111");
+//		System.out.println(nv.getMaNV());
+//		System.out.println(nv.getHoTen());
+//		System.out.println(nv.getEmail());
+//		System.out.println(nv.getLuong());
+		
+//		NhanVien nv = new NhanVien();
+//		nv.setHoTen("Nhân viên 1");
+//		nv.setTenDN("NV1");
+//		nv.setEmail("nhanvien1@mail.com");
+//		nv.setMaNV("NV1");
+//		nv.setLuong(1200000);
+////		//neu khong cap nhat mat khau thi khong can set mat khau(gia tri bang null)
 ////		nv.setMatKhau("11111");
-////		try {
-////			nvdao.spInsertEncryptNhanVien(nv);
-////		} catch (Exception ex) {
-////			Logger.getLogger(NhanVienDao.class.getName()).log(Level.SEVERE, null, ex);
-////		}
-//		
-////		List<NhanVien> nvs = nvdao.selectALLEncryptNhanVien();
-////		for(NhanVien nv : nvs) {
-////			System.out.println(nv.getMaNV());
-////			System.out.println(nv.getHoTen());
-////			System.out.println(nv.getEmail());
-////			System.out.println(nv.getLuong());
-////			System.out.println(nv.getTenDN());
-////			System.out.println(nv.getLuong());
-////		}
-//		
-////		NhanVien nv = nvdao.getNhanVienByMaNV("NV1");
-////		System.out.println(nv.getMaNV());
-////		System.out.println(nv.getHoTen());
-////		System.out.println(nv.getEmail());
-////		System.out.println(nv.getLuong());
-////		System.out.println(nv.getTenDN());
-////		System.out.println(nv.getLuong());
-//		
-////		NhanVien nv = nvdao.spSelectEncryptNhanVien("NV1", "11111");
-////		System.out.println(nv.getMaNV());
-////		System.out.println(nv.getHoTen());
-////		System.out.println(nv.getEmail());
-////		System.out.println(nv.getLuong());
-//		
-////		NhanVien nv = new NhanVien();
-////		nv.setHoTen("Nhân viên 1");
-////		nv.setTenDN("NV1");
-////		nv.setEmail("nhanvien1@mail.com");
-////		nv.setMaNV("NV1");
-////		nv.setLuong(1200000);
-//////		//neu khong cap nhat mat khau thi khong can set mat khau(gia tri bang null)
-//////		nv.setMatKhau("11111");
-////		try {
-////			nvdao.spUpdateEncryptNhanVien(nv);
-////		} catch (Exception ex) {
-////			Logger.getLogger(NhanVienDao.class.getName()).log(Level.SEVERE, null, ex);
-////		}
-//	}
+//		try {
+//			nvdao.spUpdateEncryptNhanVien(nv);
+//		} catch (Exception ex) {
+//			Logger.getLogger(NhanVienDao.class.getName()).log(Level.SEVERE, null, ex);
+//		}
+	}
 }

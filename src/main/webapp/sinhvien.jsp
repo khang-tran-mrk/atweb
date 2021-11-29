@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -271,69 +272,92 @@
 									cellspacing="0">
 									<thead>
 										<tr>
-											<th>Name</th>
-											<th>Position</th>
-											<th>Office</th>
-											<th>Age</th>
-											<th>Start date</th>
-											<th>Salary</th>
+											<th>Mã sinh viên</th>
+											<th>Họ tên</th>
+											<th>Ngày sinh</th>
+											<th>Địa chỉ</th>
+											<th>Mã lớp</th>
+											<th>Tên đăng nhập</th>
+											<th></th>
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
-											<th>Name</th>
-											<th>Position</th>
-											<th>Office</th>
-											<th>Age</th>
-											<th>Start date</th>
-											<th>Salary</th>
+											<th>Mã sinh viên</th>
+											<th>Họ tên</th>
+											<th>Ngày sinh</th>
+											<th>Địa chỉ</th>
+											<th>Mã lớp</th>
+											<th>Tên đăng nhập</th>
+											<th></th>
 										</tr>
 									</tfoot>
 									<tbody>
+										<c:forEach var="sv" items="${svs }">
+											<tr>
+												<td>${sv.maSV }</td>
+												<td>${sv.hoTen }</td>
+												<td>${sv.ngaySinh }</td>
+												<td>${sv.diaChi }</td>
+												<td>${sv.maLop }</td>
+												<td>${sv.tenDN }</td>
+												<td>
+													<a href="edit-sinh-vien?msv=${sv.maSV }">Edit</a>
+												</td>
+											</tr>
+										</c:forEach>
 
-										<tr>
-											<td>Donna Snider</td>
-											<td>Customer Support</td>
-											<td>New York</td>
-											<td>27</td>
-											<td>2011/01/25</td>
-											<td>$112,000</td>
-										</tr>
 									</tbody>
 								</table>
 							</div>
 							<!-- add lop -->
-							<form class="add-tab tab-content ">
+							<form class="add-tab tab-content " method="POST"
+								action="sinh-vien">
 								<div class="form-group">
 									<label for="">Mã sinh viên</label> <input type="text"
-										class="form-control" placeholder="Nhập mã sinh viên ...">
+										class="form-control msv" placeholder="Nhập mã sinh viên ..."
+										name="msv"> <span class="error-message"></span>
 								</div>
 								<div class="form-group">
 									<label for="">Họ tên sinh viên</label> <input type="text"
-										class="form-control" placeholder="Nhập tên sinh viên ...">
+										class="form-control hoten"
+										placeholder="Nhập tên sinh viên ..." name="hoten"> <span
+										class="error-message"></span>
+								</div>
+								<div class="form-group">
+									<label for="">Ngày sinh</label> <input type="date"
+										class="form-control ngaysinh" name="ngaysinh"> <span
+										class="error-message"></span>
 								</div>
 								<div class="form-group">
 									<label for="">Địa chỉ</label> <input type="text"
-										class="form-control" placeholder="Nhập địa chỉ ...">
+										class="form-control diachi" placeholder="Nhập địa chỉ ..."
+										name="diachi"> <span class="error-message"></span>
 								</div>
 								<div class="form-group">
-									<label for="">Mã lớp</label> <select class="form-control"
-										id="">
-										<option>1</option>
-										<option>2</option>
+									<label for="">Lớp</label> <select class="form-control" id=""
+										name="malop">
+										<c:forEach var="l" items="${lops }">
+											<option value="${l.maLop }">${l.tenLop }</option>
+										</c:forEach>
 									</select>
 								</div>
 								<div class="form-group">
 									<label for="">Tên đăng nhập</label> <input type="text"
-										class="form-control" placeholder="Nhập tên đăng nhập ...">
+										class="form-control tendn"
+										placeholder="Nhập tên đăng nhập ..." name="tendn"> <span
+										class="error-message"></span>
 								</div>
 								<div class="form-group">
 									<label for="">Mật khẩu</label> <input type="password"
-										class="form-control" placeholder="Nhập mật khẩu ...">
+										class="form-control matkhau" placeholder="Nhập mật khẩu ..."
+										name="matkhau"> <span class="error-message"></span>
 								</div>
 								<div class="form-group">
 									<label for="">Nhập lại mật khẩu</label> <input type="password"
-										class="form-control" placeholder="Nhập lại mật khẩu ...">
+										class="form-control repassword"
+										placeholder="Nhập lại mật khẩu ..."> <span
+										class="error-message"></span>
 								</div>
 								<button type="submit" class="btn btn-primary">Thêm</button>
 							</form>
@@ -407,6 +431,10 @@
 
 	<!-- Page level custom scripts -->
 	<script src="js/demo/datatables-demo.js"></script>
+
+
+
+
 
 </body>
 
