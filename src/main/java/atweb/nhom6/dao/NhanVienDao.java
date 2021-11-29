@@ -27,17 +27,17 @@ import atweb.nhom6.service.RSAUtil;
 
 public class NhanVienDao {
 
-	public void spInsertEncryptNhanVien(NhanVien nv) throws Exception {
+	public void spInsertEncryptNhanVien(NhanVien nv, String path) throws Exception {
 		Connection conn = ConnectionToDB.getConnect();
 		// MaNV, ho ten, email, luong, tendn, mat khau
 		String sql = "{call SP_INS_PUBLIC_ENCRYPT_NHANVIEN(?, ?,?, ?, ?, ?, ?)}";
 
 		// generate key for nhanVien
 		RSAKeyPairGenerator keyPairGenerator = new RSAKeyPairGenerator();
-		keyPairGenerator.writeToFile("RSA\\publicKey_" + nv.getMaNV(), keyPairGenerator.getPublicKey().getEncoded());
-		keyPairGenerator.writeToFile("RSA\\privateKey_" + nv.getMaNV(), keyPairGenerator.getPrivateKey().getEncoded());
+		keyPairGenerator.writeToFile(path + "RSA\\publicKey_" + nv.getMaNV(), keyPairGenerator.getPublicKey().getEncoded());
+		keyPairGenerator.writeToFile(path + "RSA\\privateKey_" + nv.getMaNV(), keyPairGenerator.getPrivateKey().getEncoded());
 		// encrypt message by PublicKey
-		PublicKey publicKey = KeyReader.getPublicKeyFromFile("RSA\\publicKey_" + nv.getMaNV());
+		PublicKey publicKey = KeyReader.getPublicKeyFromFile(path + "RSA\\publicKey_" + nv.getMaNV());
 		String encryptedLuong = Base64.getEncoder()
 				.encodeToString(encrypt(String.valueOf(nv.getLuong()), keyToString(publicKey)));
 

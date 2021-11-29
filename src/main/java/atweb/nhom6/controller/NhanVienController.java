@@ -1,5 +1,6 @@
 package atweb.nhom6.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -45,8 +46,10 @@ public class NhanVienController extends HttpServlet {
 		String tenDN = request.getParameter("tendn");
 		String matKhau = request.getParameter("matKhau");
 		NhanVien nv = new NhanVien(maNV, hoTen, email, luong, tenDN, matKhau);
+		String project_name = request.getContextPath().split("/")[1];
+		String path = request.getServletContext().getRealPath("").split(".metadata")[0] + project_name + File.separator;
 		try {
-			nvdao.spInsertEncryptNhanVien(nv);
+			nvdao.spInsertEncryptNhanVien(nv, path);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

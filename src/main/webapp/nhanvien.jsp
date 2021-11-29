@@ -325,7 +325,7 @@
 								</div>
 								<div class="form-group">
 									<label for="">Mật khẩu</label> <input type="password"
-										class="form-control" placeholder="Nhập mật khẩu ..." name="matkhau">
+										class="form-control" placeholder="Nhập mật khẩu ..." name="matKhau">
 								</div>
 								<div class="form-group">
 									<label for="">Nhập lại mật khẩu</label> <input type="password"
