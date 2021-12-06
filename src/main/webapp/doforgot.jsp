@@ -1,5 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<% String  codemail = (String)session.getAttribute("authcode");
+	 String codemail1 = request.getParameter("code"); 
+	 if(codemail==null){
+			response.sendRedirect("login.jsp"); 
+		}
+		else{
+			if(!(codemail.equals(codemail1))){
+				System.out.println("codemail= "+ codemail);
+				System.out.println("codemail1= "+ codemail1);
+				 response.sendRedirect("login.jsp"); 
+			}
+			
+		}%>
+	 <%@page import="java.sql.ResultSet"%>
+<%@page import="atweb.nhom6.dao.ConnectionToDB"%>
+<%ConnectionToDB con = new ConnectionToDB();      %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +28,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SB Admin 2 - Forgot Password</title>
+<title>SB Admin 2 -Do Change Password</title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -43,21 +59,36 @@
 							<div class="col-lg-6">
 								<div class="p-5">
 									<div class="text-center">
-										<h1 class="h4 text-gray-900 mb-2">Forgot Your Password?</h1>
+										<h1 class="h4 text-gray-900 mb-2">Do Change Your Password</h1>
 										<p class="mb-4">We get it, stuff happens. Just enter your
 											email address below and we'll send you a link to reset your
 											password!</p>
 									</div>
-									<form class="user"  action="${pageContext.request.contextPath}/forgot-password?action=guimail" method="POST"  accept-charset="UTF-8"  enctype="multidata/form-data">
+									<% String email = request.getParameter("email");
+                	 ResultSet pass = con.selectData("select * from account where email='"+email+"'");
+                		
+                	 	while(pass.next()){
+                		 
+                		 if(pass.getString("email").equals(null)){ %>	
+                		
+                		 <% }else{
+                		 %>
+									<form class="user"  action="${pageContext.request.contextPath}/forgot-password?action=xacthuc&email=<%pass.getString("email");%>" method="POST"  accept-charset="UTF-8"  enctype="multidata/form-data">
 										<div class="form-group">
-											<input type="email" class="form-control form-control-user"
-												id="exampleInputEmail" name="email" aria-describedby="emailHelp"
-												placeholder="Enter Email Address...">
+											<input type="password" class="form-control form-control-user"
+												id="exampleInputEmail" name="password" aria-describedby="emailHelp"
+												placeholder="Enter Password...">
+										</div>
+										<div class="form-group">
+											<input type="password" class="form-control form-control-user"
+												id="exampleInputEmail" name="repassword" aria-describedby="emailHelp"
+												placeholder="Enter rePassword Address...">
 										</div>
 										
-											<button class="btn btn-primary btn-user btn-block"> Reset
+											<button class="btn btn-primary btn-user btn-block"> Change
 											Password</button>
 									</form>
+									<%}} %>
 									<hr>
 									<div class="text-center">
 										<a class="small" href="register.html">Create an Account!</a>

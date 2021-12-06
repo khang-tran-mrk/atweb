@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import atweb.nhom6.dao.SignInDAO;
+import atweb.nhom6.dao.VerifyRecaptcha;
 import atweb.nhom6.model.ACCOUNT;
 
 /**
@@ -38,26 +39,33 @@ public class SignInServlet extends HttpServlet {
 		//lấy thông tin từ client
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
 		
 		//set username, pass 
-		ACCOUNT account = new ACCOUNT();
-		account.setUsername(username);
-		account.setPassword(password);
-		
-		System.out.println(account);
-		
-		//kiểm tra 'account' có tồn tại không 
-		int result = signinDao.check(account);
-		
-		System.out.println("result: " + result);
-		
+		if(!gRecaptchaResponse.equals("")) {
+			ACCOUNT account = new ACCOUNT();
+			account.setUsername(username);
+			account.setPassword(password);
+			
+			System.out.println(account);
+			
+			//kiểm tra 'account' có tồn tại không 
+			int result = signinDao.check(account);
+			
+			System.out.println("result: " + result);
+			
 
-		//Trả về trạng thái tương ứng
-		if (result > 0) {
-			response.sendRedirect("./home");
-		} else {
+			//Trả về trạng thái tương ứng
+			if (result > 0) {
+				response.sendRedirect("./home");
+			} else {
+				response.sendRedirect("./login");
+			}
+		}
+		else {
 			response.sendRedirect("./login");
 		}
+		
 
 	}
 

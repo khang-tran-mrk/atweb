@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-14">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src/main/java"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/apache-tomcat-9.0.46">
-		<attributes>
-			<attribute name="owner.project.facets" value="jst.web"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="D:/apache-tomcat-9.0.38"/>
+	<classpathentry kind="lib" path="src/main/webapp/lib/javax.json-1.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/lib/javax.servlet-3.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/lib/recaptcha4j-0.0.7.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/lib/javax.mail.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/lib/activation-jaf1.1.1.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/lib/commons-io-2.6.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/lib/fluent-hc-4.5.5.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/lib/gson-2.8.2.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/lib/httpclient-4.5.5.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/lib/httpcore-4.4.9.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

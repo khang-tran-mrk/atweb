@@ -21,7 +21,7 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
+<script src="https://www.google.com/recaptcha/api.js"></script>
 </head>
 
 <body class="bg-gradient-primary">
@@ -53,6 +53,8 @@
                                             <input name="password" type="password" class="form-control form-control-user"
                                                 id="exampleInputPassword" placeholder="Password">
                                         </div>
+                                        <div class="g-recaptcha"
+										data-sitekey="6Ler1HgdAAAAAEDExBaXCKj8_psbBKIp-mkgI9uK"></div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
