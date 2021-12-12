@@ -2,6 +2,12 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
+<%@page import="atweb.nhom6.model.ACCOUNT"  %>
+ <%ACCOUNT  check = (ACCOUNT)session.getAttribute("userlogin");
+ if(check != null){
+	 response.sendRedirect("./home");
+ }
+ %>
 
 <head>
 

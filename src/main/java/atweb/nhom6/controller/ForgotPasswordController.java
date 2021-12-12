@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import atweb.nhom6.dao.SignInDAO;
 import atweb.nhom6.model.ACCOUNT;
 
@@ -44,11 +45,12 @@ public class ForgotPasswordController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
 		HttpSession session = request.getSession();
-		SignInDAO user = new SignInDAO();
-		String code = user.getRandom();
+		
+		String code = new SignInDAO().getRandom();
 		if(action.equals("guimail")) {
-			String email = request.getParameter("users_email");
-			boolean success = user.sendEmail(email, code);
+			String email = request.getParameter("email");
+			System.out.print("mail =" + email);
+			boolean success = new SignInDAO().sendEmail(email, code);
 			boolean check = new SignInDAO().checkEmail(email);
 			if( check==true) {
 				if (success) 
@@ -85,6 +87,7 @@ public class ForgotPasswordController extends HttpServlet {
 					u.setPassword(users_password);
 					
 					SignInDAO.updatePassword(u);
+					
 					session.setAttribute("xacthuc", "true");
 					session.removeAttribute("authcode");
 					response.sendRedirect("./login");

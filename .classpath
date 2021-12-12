@@ -12,8 +12,6 @@
 	<classpathentry kind="lib" path="src/main/webapp/lib/javax.json-1.0.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/lib/javax.servlet-3.0.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/lib/recaptcha4j-0.0.7.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/lib/javax.mail.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/lib/activation-jaf1.1.1.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/lib/commons-io-2.6.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/lib/commons-logging-1.2.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/lib/fluent-hc-4.5.5.jar"/>

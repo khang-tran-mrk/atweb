@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import atweb.nhom6.dao.SignInDAO;
 import atweb.nhom6.dao.VerifyRecaptcha;
@@ -40,7 +41,7 @@ public class SignInServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
-		
+		HttpSession session = request.getSession();
 		//set username, pass 
 		if(!gRecaptchaResponse.equals("")) {
 			ACCOUNT account = new ACCOUNT();
@@ -57,7 +58,10 @@ public class SignInServlet extends HttpServlet {
 
 			//Trả về trạng thái tương ứng
 			if (result > 0) {
+				ACCOUNT ac =SignInDAO.GetUserByAccount(account);
+				session.setAttribute("userlogin", ac);
 				response.sendRedirect("./home");
+				
 			} else {
 				response.sendRedirect("./login");
 			}

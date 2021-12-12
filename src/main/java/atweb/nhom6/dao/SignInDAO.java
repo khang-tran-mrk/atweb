@@ -8,6 +8,7 @@ import java.util.Properties;
 import java.util.Random;
 
 import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -69,8 +70,8 @@ public class SignInDAO {
             
 
             Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-                protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-                    return new javax.mail.PasswordAuthentication("contact.cgv4@gmail.com", "hoangminhtuan");
+                protected PasswordAuthentication  getPasswordAuthentication() {
+                    return new PasswordAuthentication("contact.cgv4@gmail.com", "hoangminhtuan");
                 }
             });
 
@@ -88,7 +89,7 @@ public class SignInDAO {
     		//set message text
             mess.setText("Khang ngu hello,"
             		+ "Click the link to change the password: "  + 
-            		" http://localhost:8080/atweb/doforgot?code=" +code +"&email" +email );
+            		" http://localhost:8080/atweb/doforgot.jsp?code=" +code +"&email=" +email );
             
             //send the message
             Transport.send(mess);
@@ -123,7 +124,7 @@ public class SignInDAO {
  		//cap nhap password khi thay doi
  		public static boolean updatePassword(ACCOUNT u) {
  			try {
- 				
+ 				System.out.println("PASS ="+ u.getPassword());
  				new  ConnectionToDB().excuteSql("update ACCOUNT set password='"+u.getPassword()+"' where email='"+ u.getEmail()+"'");
  				
  				return true;
@@ -132,6 +133,26 @@ public class SignInDAO {
  				e.printStackTrace();
  			}
  			return false;
+ 		}
+ 		
+ 		public static ACCOUNT GetUserByAccount(ACCOUNT user) {
+			
+				try {
+					ResultSet rs = new ConnectionToDB().selectData("SELECT * FROM account WHERE email='" + user.getEmail() + "'");
+					if(rs.next()) {
+	 					user.setUsername(rs.getString(1));
+	 					user.setPassword(rs.getString(2));
+	 					user.setEmail(rs.getString(3));
+	 					user.setSdt(rs.getString(4));
+	 				}
+	 				return user;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+ 				return null;
+ 				
+ 			
  		}
 	
 }

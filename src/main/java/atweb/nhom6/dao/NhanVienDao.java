@@ -31,7 +31,7 @@ public class NhanVienDao {
 		Connection conn = ConnectionToDB.getConnect();
 		// MaNV, ho ten, email, luong, tendn, mat khau
 		String sql = "{call SP_INS_PUBLIC_ENCRYPT_NHANVIEN(?, ?,?, ?, ?, ?, ?)}";
-
+		
 		// generate key for nhanVien
 		RSAKeyPairGenerator keyPairGenerator = new RSAKeyPairGenerator();
 		keyPairGenerator.writeToFile(path + "RSA/publicKey_" + nv.getMaNV(), keyPairGenerator.getPublicKey().getEncoded());
